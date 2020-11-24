@@ -2,7 +2,11 @@
 class Pages {
     public function __construct()
     {
-        echo 'Employees Tracking System';
+
+    }
+
+    public function index(){
+
     }
 
 }

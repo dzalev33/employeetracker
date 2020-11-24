@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="49dcd9e7-c524-46fe-babb-02a23e47e1e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Pages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/libraries/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/libraries/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/libraries/Database.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/libraries/Database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/pages/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/pages/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +51,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606219233235</updated>
-      <workItem from="1606219244604" duration="6918000" />
+      <workItem from="1606219244604" duration="10360000" />
     </task>
     <servers />
   </component>
@@ -62,5 +63,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="479" y="100" width="577" height="624" key="find.popup/0.0.1536.824/-1920.12.1920.1040@0.0.1536.824" timestamp="1606222659261" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1606243989463">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/-1920.12.1920.1040@0.0.1536.824" timestamp="1606243989463" />
   </component>
 </project>

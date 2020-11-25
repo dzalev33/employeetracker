@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/app/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/bootstrap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/users/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/users/login.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +51,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606219233235</updated>
-      <workItem from="1606219244604" duration="18568000" />
+      <workItem from="1606219244604" duration="21916000" />
     </task>
     <servers />
   </component>

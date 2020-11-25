@@ -7,6 +7,21 @@ class User {
         $this->db = new Database;
     }
 
+    //login
+    public function login($email, $password){
+        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->bind(':email', $email);
+
+        $row =$this->db->single();
+
+        $hashed_password = $row->password;
+        if (password_verify($password, $hashed_password)){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
     //register
     public function register($data){
         $this->db->query('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');

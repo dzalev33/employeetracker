@@ -171,7 +171,7 @@ class Users extends Controller {
         if ( $_SESSION['user_type'] == 1){
             redirect('employees/index');
         }else{
-            redirect('pages/index/test');
+            redirect('pages/index');
         }
 
     }

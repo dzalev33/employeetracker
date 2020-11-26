@@ -8,6 +8,10 @@ class Employees extends Controller {
             redirect('users/login');
         }
 
+        if ($_SESSION['user_type'] != 1){
+            redirect('pages/index');
+        }
+
         $this->employeeModel = $this->model('Employee');
         $this->userModel = $this->model('User');
     }

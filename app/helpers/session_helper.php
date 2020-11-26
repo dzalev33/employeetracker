@@ -27,17 +27,19 @@ function flash($name = '', $message = '', $class= 'alert alert-success'){
 
 
 function isLoggedIn(){
-    if (isset($_SESSION['user_id'])){
+    if (isset($_SESSION['user_id']) && $_SESSION['user_type'] == 1){
         return true;
     }else{
         return false;
     }
 }
 
-//function isAdmin(){
-//    if (isset($_SESSION['user_type']) === 1){
-//        return 'admin';
-//    }else{
-//        return 'employee';
-//    }
-//}
+
+
+function isAdmin(){
+    if (isset($_SESSION['user_type']) == 1){
+        return true;
+    }else{
+        return false;
+    }
+}

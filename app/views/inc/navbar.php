@@ -18,8 +18,17 @@
 <!--            --><?php //endif; ?>
 
             <?php if (isset($_SESSION['user_id'])) : ?>
+
+                <?php if ($_SESSION['user_type']) : ?>
+                    <a class="nav-link" href="<?php echo URLROOT;?>/employees">Admin Dashboard</a>
+                <?php else : ?>
+
+                <?php endif; ?>
+
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Welcome <?php echo $_SESSION['user_name']?></a>
+
+                </li>
+                <li class="nav-item active">
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo URLROOT;?>/users/logout">Logout</a>

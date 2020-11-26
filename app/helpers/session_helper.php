@@ -24,3 +24,20 @@ function flash($name = '', $message = '', $class= 'alert alert-success'){
             }
         }
 }
+
+
+function isLoggedIn(){
+    if (isset($_SESSION['user_id'])){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//function isAdmin(){
+//    if (isset($_SESSION['user_type']) === 1){
+//        return 'admin';
+//    }else{
+//        return 'employee';
+//    }
+//}

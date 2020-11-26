@@ -106,8 +106,9 @@ class Users extends Controller {
             $data =[
                 'email' => trim($_POST['email']),
                 'password' =>trim($_POST['password']),
+                'user_type' => '',
                 'email_err' => '',
-                'password_err' => '',
+                'password_err' => ''
             ];
 
             //validate email
@@ -130,7 +131,7 @@ class Users extends Controller {
             //make errors empty
             if (empty($data['email_err'])  && empty($data['password_err']) ){
                 //log in user
-                $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+                $loggedInUser = $this->userModel->login($data['email'], $data['password'] , $data['user_type']);
 
                 if ($loggedInUser){
                     //create session
@@ -165,7 +166,13 @@ class Users extends Controller {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
-        redirect('pages/index');
+        $_SESSION['user_type'] = $user->user_type;
+
+        if ( $_SESSION['user_type'] == 1){
+            redirect('employees/index');
+        }else{
+            redirect('pages/index/test');
+        }
 
     }
 
@@ -177,13 +184,7 @@ class Users extends Controller {
         redirect('users/login');
     }
 
-    public function isLoggedIn(){
-        if (isset($_SESSION['user_id'])){
-            return true;
-        }else{
-            return false;
-        }
-    }
+
 
 
 }

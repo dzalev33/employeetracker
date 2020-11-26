@@ -10,7 +10,17 @@
 
         </ul>
         <ul class="navbar-nav ml-auto">
+
+<!--            --><?php //if (isset($_SESSION['user_type']) === 1) : ?>
+<!--            <p style="color: aliceblue"></p>-->
+<!--            --><?php //else : ?>
+<!---->
+<!--            --><?php //endif; ?>
+
             <?php if (isset($_SESSION['user_id'])) : ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Welcome <?php echo $_SESSION['user_name']?></a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo URLROOT;?>/users/logout">Logout</a>
                 </li>
@@ -22,7 +32,6 @@
                     <a class="nav-link" href="<?php echo URLROOT;?>/users/login">Login</a>
                 </li>
             <?php endif; ?>
-
         </ul>
     </div>
     </div>

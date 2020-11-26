@@ -7,6 +7,7 @@ class Pages extends Controller {
     }
 
     public function index(){
+
         $data = ['title' => 'Recruitment Task'];
         $this->view('pages/index',$data);
     }

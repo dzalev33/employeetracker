@@ -22,6 +22,7 @@
                 <?php if ($_SESSION['user_type']) : ?>
                     <a class="nav-link" href="<?php echo URLROOT;?>/employees">Admin Dashboard</a>
                 <?php else : ?>
+                    <a class="nav-link" href="<?php echo URLROOT;?>/employees"><?php echo $_SESSION['user_name'] ?></a>
 
                 <?php endif; ?>
 

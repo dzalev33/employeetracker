@@ -167,12 +167,13 @@ class Users extends Controller {
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
         $_SESSION['user_type'] = $user->user_type;
-
-        if ( $_SESSION['user_type'] == 1){
-            redirect('employees/index');
-        }else{
-            redirect('pages/index');
-        }
+        redirect('employees/index');
+//
+//        if ( $_SESSION['user_type'] == 1){
+//            redirect('employees/index');
+//        }else{
+//            redirect('pages/index');
+//        }
 
     }
 

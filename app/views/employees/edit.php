@@ -1,3 +1,4 @@
+<?php if ($_SESSION['user_type'] == 1) : ?>
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 
@@ -28,3 +29,6 @@
         </form>
     </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
+<?php else: ?>
+    <?php redirect('employees'); ?>
+<?php endif; ?>

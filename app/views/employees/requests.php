@@ -7,12 +7,9 @@
 
         <h3>Employees Work From Home Requests</h3>
         <?php flash('request_message'); ?>
+
     </div>
-    <div class="col-md-6">
-        <a href="<?php echo URLROOT; ?>/employees/addRequest" class="btn btn-primary pull-right ">
-            <i class="fa fa-pencil"> Make a Request to Work From Home ova ke go gleda samo usero</i>
-        </a>
-    </div>
+
 
 </div>
 <?php foreach ($data['requests'] as $request) : ?>
@@ -41,6 +38,11 @@
                   action="<?php echo URLROOT; ?>/employees/approveRequest/<?php echo $request->requestId; ?>"
                   method="post">
                 <input type="submit" value="Approve Request" class="btn btn-success">
+            </form>
+            <form class="pull-right ml-5"
+                  action="<?php echo URLROOT; ?>/employees/removeRequest/<?php echo $request->requestId; ?>"
+                  method="post">
+                <input type="submit" value="Remove Request" class="btn btn-danger">
             </form>
 
         </div>

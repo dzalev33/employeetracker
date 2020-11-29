@@ -1,7 +1,8 @@
-
+<?php require APPROOT . '/views/inc/header.php'; ?>
 <?php if ($_SESSION['user_type'] == 1) : ?>
-    <?php require APPROOT . '/views/inc/header.php'; ?>
+
     <?php flash('employee_message'); ?>
+    <?php flash('email_message'); ?>
     <div class="row mb-3">
         <div class="col-md-6">
 
@@ -32,8 +33,9 @@
 
 
 <?php else: ?>
-    <?php require APPROOT . '/views/inc/header.php'; ?>
-    <h5>You are Logged in as Employee</h5>
-    <?php require APPROOT . '/views/inc/footer.php'; ?>
+
+<?php header('location: ' . URLROOT . '/employees/show/'.  $_SESSION['user_id'] ); ?>
+
 <?php endif; ?>
 
+<?php require APPROOT . '/views/inc/footer.php'; ?>

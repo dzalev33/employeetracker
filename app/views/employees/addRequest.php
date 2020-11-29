@@ -1,10 +1,11 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<a href="<?php echo URLROOT; ?>/employees/requests" class="btn btn-light"> <i class="fa fa-backward"> Back</i></a>
+<a href="<?php echo URLROOT;?>/employees" class="btn btn-light"> <i class="fa fa-backward"> Back</i></a>
 
 <div class="row">
     <div class="col-md-8 mx-auto">
         <div class="card card-body bg-light mt-5">
             <h5>Please enter the dates that you want to work from home</h5>
+            <p> Please note that a request must be made at least 4 hours before the end of the previous day</p>
             <form action="<?php echo URLROOT; ?>/employees/addRequest" method="post" class="employeeRequest">
 <!--                <input type="text" name="status" value="pending" style="visibility: hidden">-->
                 <div class="form-group">

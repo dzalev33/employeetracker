@@ -10,6 +10,8 @@ class Employees extends Controller
             redirect('users/login');
         }
 
+
+
         $this->employeeModel = $this->model('Employee');
         $this->userModel = $this->model('User');
         $this->requestModel = $this->model('Request');
@@ -69,10 +71,23 @@ class Employees extends Controller
             }
 
             if (empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err'])) {
+
                 //hash password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 if ($this->employeeModel->addEmployee($data)) {
                     flash('employee_message', 'You have created new Employee in our system');
+                    flash('email_message', 'An email has been sent to the employeee with his new credentials');
+                    $to_email = $data['email'];
+                    $subject = "Employee credentials";
+                    $body = "your email is:" .$data['email'] . " and your password:" . $data['password'];
+                    $headers = "From: dzalevwork@gmail.com";
+
+                    if (mail($to_email, $subject, $body, $headers)) {
+                        echo "Email successfully sent to $to_email...";
+                    } else {
+                        echo "Email sending failed...";
+                    }
+
                     redirect('employees');
 
                 } else {
@@ -166,127 +181,25 @@ class Employees extends Controller
 
     }
 
-// employee/show/id
-
-//    public function request($id)
-//    {
-//        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//            //sanitize array
-//            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-//            $data = [
-//                'user_id' => $_SESSION['user_id'],
-//                'request_from' => $_POST['request_from'],
-//                'request_to' => $_POST['request_to'],
-//                'status' => trim($_POST['status']),
-//
-//                'request_from_err' => '',
-//                'request_to_err' => ''
-//            ];
-//
-//            if (empty($data['request_from'])) {
-//                $data['request_from_err'] = 'Please enter date from';
-//            }
-//            //validate name
-//            if (empty($data['request_to'])) {
-//                $data['request_to_err'] = 'Please date To';
-//            }
-//
-//
-//            if (empty($data['request_from']) && empty($data['request_to'])) {
-//
-//                if ($this->requestModel->addEmployeeRequest($data)) {
-//                    flash('request_message', 'You have submitted a Work from Home Request');
-//                    redirect('employees/show');
-//
-//                } else {
-//                    die('something went wrong');
-//                }
-//            } else {
-////                load view with errors
-//                $this->view('employees/show', $data);
-//            }
-//
-//
-//        } else {
-//
-//            //get employee
-//             $requests = $this->requestModel->getRequestById($id);
-//            $employee = $this->requestModel->getRequestById($id);
-//            //check for credentials
-////            if ($employee->id !== $_SESSION['user_id'] ){
-////                redirect('employees');
-////            }
-//
-//            $data = [
-//                'id' => $id,
-//                'request_from' => $requests->request_from,
-//                'request_to' => $requests->request_to
-//
-//
-//            ];
-//            $this->view('employees/request', $data);
-//        }
-//    }
-
-//    public function workFromHomeRequest()
-//    {
-//        // add work from home request
-//        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//            //sanitize array
-//            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-//            $data = [
-//                'user_id' => $_SESSION['user_id'],
-//                'request_from' => $_POST['request_from'],
-//                'request_to' => $_POST['request_to'],
-//                'status' => trim($_POST['status']),
-//
-//                'request_from_err' => '',
-//                'request_to_err' => ''
-//            ];
-//
-//            if (empty($data['request_from'])) {
-//                $data['request_from_err'] = 'Please enter date from';
-//            }
-//            //validate name
-//            if (empty($data['request_to'])) {
-//                $data['request_to_err'] = 'Please date To';
-//            }
-//
-//
-//            if (empty($data['request_from']) && empty($data['request_to'])) {
-//
-//                if ($this->requestModel->addEmployeeRequest($data)) {
-//                    flash('request_message', 'You have submitted a Work from Home Request');
-//                    redirect('employees/show');
-//
-//                } else {
-//                    die('something went wrong');
-//                }
-//            } else {
-////                load view with errors
-//                $this->view('employees/show', $data);
-//            }
-//
-//        } else {
-//            $data = [
-//                'request_from' => '',
-//                'request_to' => '',
-//                'status' => ''
-//
-//
-//            ];
-//            $this->view('employees/show', $data);
-//        }
-//    }
-
     public function show($id)
     {
+
         $requests = $this->requestModel->getRequests();
+      $request = $this->requestModel->getRequestById($id);
         $employee = $this->employeeModel->getEmployeeById($id);
 
+//        if ($request->user_id != $_SESSION['user_id']){
+//
+//        }
+
+
         $data = [
+
             'employee' => $employee,
-            'requests' => $requests
+            'requests' => $requests,
+            'request' => $request
+
+
         ];
 
         $this->view('employees/show', $data);
@@ -348,7 +261,18 @@ class Employees extends Controller
 
                 if ($this->requestModel->addEmployeeRequest($data)) {
                     flash('request_message', 'You have created new request in our system! Please wait for out Administrator to respond.');
-                    redirect('employees/requests');
+                    flash('email_message', 'An email with the new Request status was sent to the Administrator. Please wait for his response');
+                    $to_email = $data['email'];
+                    $subject = "Employee credentials";
+                    $body = "your request status is:" .$data['status'];
+                    $headers = "From: dzalevwork@gmail.com";
+
+                    if (mail($to_email, $subject, $body, $headers)) {
+                        echo "Email successfully sent to $to_email...";
+                    } else {
+                        echo "Email sending failed...";
+                    }
+                    header('location: ' . URLROOT . '/employees/show/'.  $_SESSION['user_id'] );
 
                 } else {
                     die('something went wrong');
@@ -387,6 +311,22 @@ class Employees extends Controller
 
        }
    }
+    public function cancelRequest($id){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->requestModel->cancelRequestById($id)){
+                flash('request_message', 'Request Canceled! the Employee will be notified by email');
+                header('location: ' . URLROOT . '/employees/show/'.  $_SESSION['user_id'] );
+            }else{
+                die('something went wrong');
+            }
+
+
+        } else {
+            redirect('employees/requests');
+
+        }
+    }
 
     public function rejectRequest($id){
 
@@ -404,5 +344,88 @@ class Employees extends Controller
 
         }
     }
+
+    public function removeRequest($id){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->requestModel->deleteRequest($id)) {
+                flash('request_message', 'The Request was Removed');
+                redirect('employees/requests');
+            } else {
+                die('something went wrong');
+            }
+        } else {
+            redirect('employees/requests');
+        }
+    }
+
+    public function licences(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            var_dump($_POST);
+            //sanitize array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'request_from' => trim($_POST['request_from']),
+                'request_to' => trim($_POST['request_to']),
+                'status' => 'Pending',
+
+                'request_from_err' => '',
+                'request_to_err' => ''
+            ];
+
+            //validation
+            //validate name
+            if (empty($data['request_from'])) {
+                $data['request_from_err'] = 'Please Enter date from';
+            }
+
+            if (empty($data['request_to'])) {
+                $data['request_to_err'] = 'Please Enter date to';
+            }
+
+            if (empty($data['request_from_err']) &&  empty($data['request_to_err'])) {
+
+
+                if ($this->requestModel->addEmployeeRequest($data)) {
+                    flash('request_message', 'You have created new request in our system! Please wait for out Administrator to respond.');
+                    redirect('employees/requests');
+
+                } else {
+                    die('something went wrong');
+                }
+            } else {
+
+//                load view with errors
+                $this->view('employees/addRequest', $data);
+            }
+
+        } else {
+            $data = [
+                'request_from' => '',
+                'request_to' => ''
+
+
+            ];
+            $this->view('employees/addRequest', $data);
+        }
+
+    }
+
+    public function sendMailToEmployee($data){
+        //test email
+        $to_email = "dzalev@hotmail.com";
+        $subject = "Simple Email Test via PHP";
+        $body = "Hi,nn This is test email send by PHP Script";
+        $headers = "From: dzalevwork@gmail.com";
+
+        if (mail($to_email, $subject, $body, $headers)) {
+            echo "Email successfully sent to $to_email...";
+        } else {
+            echo "Email sending failed...";
+        }
+    }
+
+
+
 
 }

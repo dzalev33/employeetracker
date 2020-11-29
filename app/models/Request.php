@@ -28,7 +28,7 @@ class Request
                                 FROM request
                                 INNER JOIN users
                                 ON request.user_id = users.id
-                                ORDER BY request.created_at DESC
+                                ORDER BY request.created_at ASC
                                 ');
 
         $results = $this->db->resultSet();
@@ -67,9 +67,34 @@ class Request
             return false;
         }
     }
+    public function cancelRequestById($id){
+        $this->db->query('UPDATE request SET status = "Canceled" WHERE id = :id ');
+        //bind values
+        $this->db->bind(':id', $id);
+
+
+        if ($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public function rejectRequestById($id){
         $this->db->query('UPDATE request SET status = "Rejected" WHERE id = :id ');
+        //bind values
+        $this->db->bind(':id', $id);
+
+
+        if ($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function deleteRequest($id){
+        $this->db->query('DELETE FROM request WHERE id = :id ');
         //bind values
         $this->db->bind(':id', $id);
 

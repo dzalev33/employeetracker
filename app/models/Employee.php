@@ -85,4 +85,7 @@ class Employee {
         }
     }
 
+    public function updateLicences($data){}
+
+
 }

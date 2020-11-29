@@ -1,8 +1,6 @@
 <?php
 
-class Request
-{
-
+class Request {
     private $db;
 
     public function __construct()
@@ -32,16 +30,14 @@ class Request
                                 ');
 
         $results = $this->db->resultSet();
-
         return $results;
     }
 
     public function addEmployeeRequest($data){
-
         $this->db->query('INSERT INTO request (user_id, request_from, request_to, status) 
                                     VALUES (:user_id, :request_from, :request_to, :status)');
-        //bind values
 
+        //bind values
         $this->db->bind(':user_id', $data['user_id']);
         $this->db->bind(':request_from', $data['request_from']);
         $this->db->bind(':request_to', $data['request_to']);
@@ -52,14 +48,13 @@ class Request
         }else{
             return false;
         }
-
     }
 
     public function approveRequestById($id){
         $this->db->query('UPDATE request SET status = "Approved" WHERE id = :id ');
+
         //bind values
         $this->db->bind(':id', $id);
-
 
         if ($this->db->execute()){
             return true;
@@ -67,11 +62,12 @@ class Request
             return false;
         }
     }
+
     public function cancelRequestById($id){
         $this->db->query('UPDATE request SET status = "Canceled" WHERE id = :id ');
+
         //bind values
         $this->db->bind(':id', $id);
-
 
         if ($this->db->execute()){
             return true;
@@ -85,7 +81,6 @@ class Request
         //bind values
         $this->db->bind(':id', $id);
 
-
         if ($this->db->execute()){
             return true;
         }else{
@@ -98,13 +93,10 @@ class Request
         //bind values
         $this->db->bind(':id', $id);
 
-
         if ($this->db->execute()){
             return true;
         }else{
             return false;
         }
     }
-
-
 }

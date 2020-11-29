@@ -11,9 +11,7 @@ class Employee {
     public function getEmployees(){
 //        $this->db->query('SELECT * FROM users where user_type = 0');
         $this->db->query('SELECT * FROM users ');
-
         $results = $this->db->resultSet();
-
         return $results;
     }
 
@@ -21,7 +19,6 @@ class Employee {
     public function findUserByEmail($email){
         $this->db->query('SELECT * FROM users WHERE email = :email');
         $this->db->bind(':email', $email);
-
         $row = $this->db->single();
 
         //check
@@ -45,7 +42,6 @@ class Employee {
         }else{
             return false;
         }
-
     }
 
     public function updateEmployee($data){
@@ -61,7 +57,6 @@ class Employee {
         }else{
             return false;
         }
-
     }
 
     public function getEmployeeById($id){
@@ -77,7 +72,6 @@ class Employee {
         //bind values
         $this->db->bind(':id', $id);
 
-
         if ($this->db->execute()){
             return true;
         }else{
@@ -85,7 +79,8 @@ class Employee {
         }
     }
 
-    public function updateLicences($data){}
+    public function updateLicences($data){
 
+    }
 
 }

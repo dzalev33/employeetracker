@@ -1,13 +1,10 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php if ($_SESSION['user_type'] == 1) : ?>
-
     <?php flash('employee_message'); ?>
     <?php flash('email_message'); ?>
     <div class="row mb-3">
         <div class="col-md-6">
-
             <h5>You are Logged in as Administrator</h5>
-
             <h3>Employees</h3>
         </div>
         <div class="col-md-6">
@@ -30,8 +27,6 @@
             <a href="<?php echo URLROOT;?>/employees/show/<?php echo $employee->id?>" class="btn btn-dark">Show Employee Details</a>
         </div>
     <?php endforeach; ?>
-
-
 <?php else: ?>
 
 <?php header('location: ' . URLROOT . '/employees/show/'.  $_SESSION['user_id'] ); ?>

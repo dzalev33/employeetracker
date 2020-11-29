@@ -3,15 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="49dcd9e7-c524-46fe-babb-02a23e47e1e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Employees.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Employees.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Pages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Requests.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Requests.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers/url_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/url_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/helpers/session_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/session_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/libraries/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/libraries/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/libraries/Core.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/libraries/Core.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Employee.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Employee.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/employees/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/employees/add.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/employees/addRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/employees/addRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/employees/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/employees/edit.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/employees/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/employees/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/employees/requests.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/employees/requests.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/employees/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/employees/show.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/inc/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/inc/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/inc/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/inc/navbar.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606219233235</updated>
-      <workItem from="1606219244604" duration="103842000" />
+      <workItem from="1606219244604" duration="106498000" />
     </task>
     <servers />
   </component>

@@ -1,26 +1,25 @@
 <?php
 
 class Users extends Controller {
+
     public function __construct()
     {
         $this->userModel = $this->model('User');
-
     }
 
     public function register(){
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             //process form
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data =[
-                'name' => trim($_POST['name']),
-                'email' => trim($_POST['email']),
-                'password' =>trim($_POST['password']),
+                'name'             => trim($_POST['name']),
+                'email'            => trim($_POST['email']),
+                'password'         =>trim($_POST['password']),
                 'confirm_password' => trim($_POST['confirm_password']),
-                'name_err' => '',
-                'email_err' => '',
-                'password_err' => '',
+                'name_err'         => '',
+                'email_err'        => '',
+                'password_err'     => '',
                 'confirm_password_err'
             ];
 
@@ -40,7 +39,6 @@ class Users extends Controller {
             }
 
             //validate password
-
             if (empty($data['password'])){
                 $data['password_err'] = 'Please enter password';
             }elseif(strlen($data['password']) <6){
@@ -48,7 +46,6 @@ class Users extends Controller {
             }
 
             //validate confirm password
-
             if (empty($data['confirm_password'])){
                 $data['confirm_password_err'] = 'Please confirm password';
             }else{
@@ -60,7 +57,6 @@ class Users extends Controller {
             //make errors empty
             if (empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
                 //if everything is validated proceed
-
                 //hash password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
@@ -72,11 +68,9 @@ class Users extends Controller {
                    die('something went wrong');
                }
             } else {
-
                 //load view with errors
                 $this->view('users/register', $data);
             }
-
         }else{
             //init data
             $data =[
@@ -89,25 +83,20 @@ class Users extends Controller {
               'password_err' => '',
               'confirm_password_err' => ''
             ];
-
             //load view
             $this->view('users/register', $data);
         }
     }
 
-
     public function login(){
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-
             //process form
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $data =[
-                'email' => trim($_POST['email']),
-                'password' =>trim($_POST['password']),
-                'user_type' => '',
-                'email_err' => '',
+                'email'        => trim($_POST['email']),
+                'password'     =>trim($_POST['password']),
+                'user_type'    => '',
+                'email_err'    => '',
                 'password_err' => ''
             ];
 
@@ -142,7 +131,6 @@ class Users extends Controller {
                     $this->view('users/login',$data);
                 }
             } else {
-
                 //load view with errors
                 $this->view('users/login', $data);
             }
@@ -151,9 +139,9 @@ class Users extends Controller {
         }else{
             //init data
             $data =[
-                'email' => '',
-                'password' =>'',
-                'email_err' => '',
+                'email'        => '',
+                'password'     =>'',
+                'email_err'    => '',
                 'password_err' => '',
             ];
 
@@ -163,14 +151,11 @@ class Users extends Controller {
     }
 
     public function createUserSession($user){
-        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_id']    = $user->id;
         $_SESSION['user_email'] = $user->email;
-        $_SESSION['user_name'] = $user->name;
-        $_SESSION['user_type'] = $user->user_type;
-
-
+        $_SESSION['user_name']  = $user->name;
+        $_SESSION['user_type']  = $user->user_type;
         redirect('employees');
-
     }
 
     public function logout(){
@@ -180,8 +165,4 @@ class Users extends Controller {
         session_destroy();
         redirect('users/login');
     }
-
-
-
-
 }

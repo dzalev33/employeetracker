@@ -2,31 +2,25 @@
 
 class Employees extends Controller
 {
-
-
     public function __construct()
     {
         if (!isLoggedIn()) {
             redirect('users/login');
         }
-
-
-
         $this->employeeModel = $this->model('Employee');
-        $this->userModel = $this->model('User');
-        $this->requestModel = $this->model('Request');
+        $this->userModel     = $this->model('User');
+        $this->requestModel  = $this->model('Request');
     }
 
     public function index()
     {
         //get employees
-
         $employees = $this->employeeModel->getEmployees();
-        $requests = $this->requestModel->getRequests();
+        $requests  = $this->requestModel->getRequests();
 
         $data = [
             'employees' => $employees,
-            'requests' => $requests
+            'requests'  => $requests
         ];
         $this->view('employees/index', $data);
     }
@@ -34,16 +28,15 @@ class Employees extends Controller
     //add employee
     public function add()
     {
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //sanitize array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
-                'name' => trim($_POST['name']),
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'name_err' => '',
-                'email_err' => '',
+                'name'         => trim($_POST['name']),
+                'email'        => trim($_POST['email']),
+                'password'     => trim($_POST['password']),
+                'name_err'     => '',
+                'email_err'    => '',
                 'password_err' => ''
             ];
 
@@ -76,55 +69,49 @@ class Employees extends Controller
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 if ($this->employeeModel->addEmployee($data)) {
                     flash('employee_message', 'You have created new Employee in our system');
+
+                    //send email
                     flash('email_message', 'An email has been sent to the employeee with his new credentials');
                     $to_email = $data['email'];
-                    $subject = "Employee credentials";
-                    $body = "your email is:" .$data['email'] . " and your password:" . $data['password'];
-                    $headers = "From: dzalevwork@gmail.com";
-
+                    $subject  = "Employee credentials";
+                    $body     = "your email is:" .$data['email'] . " and your password:" . $data['password'];
+                    $headers  = "From: dzalevwork@gmail.com";
                     if (mail($to_email, $subject, $body, $headers)) {
                         echo "Email successfully sent to $to_email...";
                     } else {
                         echo "Email sending failed...";
                     }
-
                     redirect('employees');
-
                 } else {
                     die('something went wrong');
                 }
             } else {
-
-//                load view with errors
+                // load view with errors
                 $this->view('employees/add', $data);
             }
-
         } else {
             $data = [
-                'name' => '',
-                'email' => '',
+                'name'     => '',
+                'email'    => '',
                 'password' => ''
-
             ];
             $this->view('employees/add', $data);
         }
-
     }
 
     //edit employee
-
     public function edit($id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //sanitize array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
-                'id' => $id,
-                'name' => trim($_POST['name']),
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'name_err' => '',
-                'email_err' => '',
+                'id'           => $id,
+                'name'         => trim($_POST['name']),
+                'email'        => trim($_POST['email']),
+                'password'     => trim($_POST['password']),
+                'name_err'     => '',
+                'email_err'    => '',
                 'password_err' => ''
             ];
 
@@ -139,7 +126,6 @@ class Employees extends Controller
                 $data['email_err'] = 'Please enter email';
             } else {
                 //check email if exists in database
-
             }
 
             //validate password
@@ -152,59 +138,45 @@ class Employees extends Controller
             if (empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err'])) {
                 //hash password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
                 if ($this->employeeModel->updateEmployee($data)) {
                     flash('employee_message', 'You have Updated Employee Data');
                     redirect('employees');
-
                 } else {
                     die('something went wrong');
                 }
             } else {
-
 //                load view with errors
                 $this->view('employees/edit', $data);
             }
-
         } else {
             //get employee
             $employee = $this->employeeModel->getEmployeeById($id);
 
             $data = [
-                'id' => $id,
-                'name' => $employee->name,
-                'email' => $employee->email,
+                'id'       => $id,
+                'name'     => $employee->name,
+                'email'    => $employee->email,
                 'password' => $employee->password
 
             ];
             $this->view('employees/edit', $data);
         }
-
     }
 
     public function show($id)
     {
-
         $requests = $this->requestModel->getRequests();
-      $request = $this->requestModel->getRequestById($id);
+        $request  = $this->requestModel->getRequestById($id);
         $employee = $this->employeeModel->getEmployeeById($id);
 
-//        if ($request->user_id != $_SESSION['user_id']){
-//
-//        }
-
-
         $data = [
-
             'employee' => $employee,
             'requests' => $requests,
-            'request' => $request
-
-
+            'request'  => $request
         ];
 
         $this->view('employees/show', $data);
-
-
     }
 
     public function delete($id)
@@ -221,7 +193,7 @@ class Employees extends Controller
         }
     }
 
-//REQUESTS///////////////////////////
+///////////////////////REQUESTS///////////////////////////
 
     public function requests(){
         $requests = $this->requestModel->getRequests();
@@ -232,20 +204,17 @@ class Employees extends Controller
     }
 
     public function addRequest(){
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //sanitize array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
-                'user_id' => $_SESSION['user_id'],
-                'request_from' => trim($_POST['request_from']),
-                'request_to' => trim($_POST['request_to']),
-                'status' => 'Pending',
-
+                'user_id'          => $_SESSION['user_id'],
+                'request_from'     => trim($_POST['request_from']),
+                'request_to'       => trim($_POST['request_to']),
+                'status'           => 'Pending',
                 'request_from_err' => '',
-                'request_to_err' => ''
+                'request_to_err'   => ''
             ];
-
             //validation
             //validate name
             if (empty($data['request_from'])) {
@@ -257,15 +226,14 @@ class Employees extends Controller
             }
 
             if (empty($data['request_from_err']) &&  empty($data['request_to_err'])) {
-
-
                 if ($this->requestModel->addEmployeeRequest($data)) {
                     flash('request_message', 'You have created new request in our system! Please wait for out Administrator to respond.');
+                    //send email
                     flash('email_message', 'An email with the new Request status was sent to the Administrator. Please wait for his response');
                     $to_email = $data['email'];
-                    $subject = "Employee credentials";
-                    $body = "your request status is:" .$data['status'];
-                    $headers = "From: dzalevwork@gmail.com";
+                    $subject  = "Employee credentials";
+                    $body     = "your request status is:" .$data['status'];
+                    $headers  = "From: dzalevwork@gmail.com";
 
                     if (mail($to_email, $subject, $body, $headers)) {
                         echo "Email successfully sent to $to_email...";
@@ -273,30 +241,23 @@ class Employees extends Controller
                         echo "Email sending failed...";
                     }
                     header('location: ' . URLROOT . '/employees/show/'.  $_SESSION['user_id'] );
-
                 } else {
                     die('something went wrong');
                 }
             } else {
-
 //                load view with errors
                 $this->view('employees/addRequest', $data);
             }
-
         } else {
             $data = [
                 'request_from' => '',
-                'request_to' => ''
-
-
+                'request_to'   => ''
             ];
             $this->view('employees/addRequest', $data);
         }
     }
 
-
    public function approveRequest($id){
-
        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            if ($this->requestModel->approveRequestById($id)){
                flash('request_message', 'Request Approved! the Employee will be notified by email');
@@ -304,15 +265,12 @@ class Employees extends Controller
            }else{
                die('something went wrong');
            }
-
-
        } else {
            redirect('employees/requests');
-
        }
    }
-    public function cancelRequest($id){
 
+    public function cancelRequest($id){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->requestModel->cancelRequestById($id)){
                 flash('request_message', 'Request Canceled! the Employee will be notified by email');
@@ -320,16 +278,12 @@ class Employees extends Controller
             }else{
                 die('something went wrong');
             }
-
-
         } else {
             redirect('employees/requests');
-
         }
     }
 
     public function rejectRequest($id){
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->requestModel->rejectRequestbyId($id)){
                 flash('request_message', 'Request rejected, the Employee will be notified by email');
@@ -337,11 +291,8 @@ class Employees extends Controller
             }else{
                 die('something went wrong');
             }
-
-
         } else {
             redirect('employees/requests');
-
         }
     }
 
@@ -364,15 +315,13 @@ class Employees extends Controller
             //sanitize array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
-                'user_id' => $_SESSION['user_id'],
-                'request_from' => trim($_POST['request_from']),
-                'request_to' => trim($_POST['request_to']),
-                'status' => 'Pending',
-
+                'user_id'          => $_SESSION['user_id'],
+                'request_from'     => trim($_POST['request_from']),
+                'request_to'       => trim($_POST['request_to']),
+                'status'           => 'Pending',
                 'request_from_err' => '',
-                'request_to_err' => ''
+                'request_to_err'   => ''
             ];
-
             //validation
             //validate name
             if (empty($data['request_from'])) {
@@ -384,31 +333,23 @@ class Employees extends Controller
             }
 
             if (empty($data['request_from_err']) &&  empty($data['request_to_err'])) {
-
-
                 if ($this->requestModel->addEmployeeRequest($data)) {
                     flash('request_message', 'You have created new request in our system! Please wait for out Administrator to respond.');
                     redirect('employees/requests');
-
                 } else {
                     die('something went wrong');
                 }
             } else {
-
 //                load view with errors
                 $this->view('employees/addRequest', $data);
             }
-
         } else {
             $data = [
                 'request_from' => '',
-                'request_to' => ''
-
-
+                'request_to'   => ''
             ];
             $this->view('employees/addRequest', $data);
         }
-
     }
 
     public function sendMailToEmployee($data){
@@ -424,8 +365,4 @@ class Employees extends Controller
             echo "Email sending failed...";
         }
     }
-
-
-
-
 }

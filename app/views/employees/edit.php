@@ -1,15 +1,10 @@
 <?php if ($_SESSION['user_type'] == 1) : ?>
 <?php require APPROOT . '/views/inc/header.php'; ?>
-
-
     <a  href="<?php echo URLROOT; ?>/employees" class="btn btn-light"> <i class="fa fa-backward"> Back</i></a>
     <div class="card card-body bg-light mt-5">
-
         <h2>Edit Employee</h2>
         <p>Create a new Employee account in our system</p>
-
         <form action="<?php echo URLROOT; ?>/employees/edit/<?php echo $data['id']?>" method="post">
-
             <div class="form-group">
                 <label for="name">Name: <sup>*</sup></label>
                 <input type="text" name="name" class="form-control form-control-lg <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['name']; ?>">

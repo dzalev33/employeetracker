@@ -85,7 +85,14 @@
                                         <th scope="row"></th>
                                         <td><?php echo $groups->request_from; ?></td>
                                         <td><?php echo $groups->request_to; ?></td>
-                                        <td><?php echo $groups->status; ?></td>
+                                        <td><span class="badge <?php
+                                            if ($groups->status === 'Approved'){
+                                                echo 'badge-success';
+                                            }elseif($groups->status === 'Rejected'){
+                                                echo 'badge-danger';
+                                            }else{
+                                                echo 'badge-warning';
+                                            }?>"> <?php echo $groups->status; ?></span></td>
                                         <td>
                                             <form class="pull-right ml-5 pt-3"
                                                   action="<?php echo URLROOT; ?>/employees/cancelRequest/<?php echo $groups->requestId; ?>"

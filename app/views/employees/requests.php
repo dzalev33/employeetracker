@@ -13,7 +13,15 @@
             <span><b><?php echo $request->name; ?></b> Has request to work from home</span>
         </div>
         <div class="bg-light p-2 mb-3">
-            Request status: <span class="badge badge-warning"><?php echo $request->status; ?></span>
+            Request status: <span class="badge  <?php
+            if ($request->status === 'Approved'){
+                echo 'badge-success';
+            }elseif($request->status === 'Rejected'){
+                echo 'badge-danger';
+            }else{
+                echo 'badge-warning';
+            }
+            ?>"><?php echo $request->status; ?></span>
         </div>
         <div class="bg-light p-2 mb-3">
             Requested from: <b><?php echo $request->request_from; ?></b> To: <b><?php echo $request->request_to; ?></b>

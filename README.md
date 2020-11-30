@@ -8,7 +8,7 @@ For development purpuses, I have used XAMPP server and for emails I have used ph
 
 
 Please go to the `config.php` file, so you can define all your Params like APPROOT,URLROOT and SITENAME.
-######Database
+###### Database
 I have included schema creation script in the root folder `employeetracker.sql`
 with some dummy data.
 
@@ -16,9 +16,9 @@ with some dummy data.
 In order to connect with your local database, you can define your own Database params like DB_HOST, DB_NAME, DB_USER, DB_PASS in :`config.php`.
 
 
-#How to use the app
+# How to use the app
 
-####Admin Login 
+#### Admin Login 
 ##### Email: admin@admin.com
 ##### Password:123456
 
